@@ -22,11 +22,11 @@ while True:
   row_num += 1
 
 num_of_students = row_num - 2
-a_plus = (num_of_students * 0.3) * 0.5
-a_zero = (num_of_students * 0.3)
-b_plus = a_zero + (num_of_students * 0.4 * 0.5)
-b_zero = (num_of_students * 0.7)
-c_plus = b_zero + ((num_of_students - b_zero) * 0.5)
+a_plus = int((num_of_students * 0.3) * 0.5)
+a_zero = int((num_of_students * 0.3))
+b_plus = a_zero + int((num_of_students * 0.4 * 0.5))
+b_zero = int((num_of_students * 0.7))
+c_plus = int(b_zero + ((num_of_students - b_zero) * 0.5))
 c_zero = num_of_students
 
 a = a_zero
@@ -54,47 +54,56 @@ for s in range(2, row_num):
 
 grades = []
 a_check = 0
+az_check = 0
 b_check = 0
+bz_check = 0
 c_check = 0
+cz_check = 0
+f = 0
 
 for g in rank:
   if rank[g] == -1:
     grades.append([g, 'F'])
-  elif rank[g] < a_plus:
+    f += 1
+  elif rank[g] <= a_plus:
     grades.append([g, 'A+'])
     a_check += 1
   elif rank[g] > a_plus and rank[g] <= a_zero:
     grades.append([g, 'A0'])
+    az_check += 1
   elif rank[g] > a_zero and rank[g] <= b_plus:
     grades.append([g, 'B+'])
     b_check += 1
+    
   elif rank[g] > b_plus and rank[g] <= b_zero:
     grades.append([g, 'B0'])
+    bz_check += 1
   elif rank[g] > b_zero and rank[g] <= c_plus:
     grades.append([g, 'C+'])
     c_check += 1
   elif rank[g] > c_plus:
     grades.append([g, 'C0'])
+    cz_check += 1
 
 grades = dict(grades)
 grades = list(grades.values())
 
 i = 0
-if a_check > a / 2 :
+if a_check > az_check :
   for g in grades:
     if g == 'A+':
       grades[i] = 'A0'
     i += 1
 
 i = 0
-if b_check > b / 2:
+if b_check > bz_check:
   for g in grades:
     if g == 'B+':
       grades[i] = 'B0'
     i += 1
 
 i = 0
-if c_check > c / 2:
+if c_check > cz_check:
   for g in grades:
     if g == 'C+':
       grades[i] = 'C0'
@@ -115,3 +124,4 @@ while True:
   i += 1
 
 wb.save( filename = "student.xlsx" )
+
