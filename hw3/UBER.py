@@ -8,7 +8,7 @@ input_path = sys.argv[1]
 output_path = sys.argv[2] 
 
 def getDay_c(a,b,c):
-    daylist = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
+    daylist = ['MON', 'TUE', 'WED', 'THR', 'FRI', 'SAT', 'SUN']
     return daylist[datetime.date(a,b,c).weekday()]
 
 result = dict()
